@@ -260,6 +260,12 @@ i18n.prototype = {
 			if (this.devMode) {
 				this.writeFile(locale);
 			}
+
+                        // if current locale is not default, and the string is mssing from current
+                        // and if the missing locale exists in default locale, show the default locale string instead
+                        if ((locale !== this.defaultLocale) && this.locales[this.defaultLocale][singular]) {
+                            this.locales[locale][singular] = this.locales[this.defaultLocale][singular];
+                        }
 		}
 
 		return this.locales[locale][singular];
